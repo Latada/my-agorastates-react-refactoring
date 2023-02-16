@@ -1,7 +1,8 @@
+
 import { useState } from "react";
 
 export const Discussion = ({ discussion }) => {
-  const { id, createdAt, title, url, author, answer, bodyHTML, avatarUrl } = discussion;
+  const { createdAt, title, author, answer, bodyHTML, avatarUrl  } = discussion;
 
   const [storyIsOpen, setOpen] = useState(false);
   const [answerIsOpen, setAnswerIsOpen] = useState(false);
@@ -9,10 +10,8 @@ export const Discussion = ({ discussion }) => {
   const contentOpen = () => {
     setOpen(storyIsOpen => !storyIsOpen);
   }
-  const answerOpen = () => {
-    if (answer !== null) {    
+  const answerOpen = () => {  
       setAnswerIsOpen(answerIsOpen => !answerIsOpen);
-    }
   }
   
   return (
@@ -29,15 +28,23 @@ export const Discussion = ({ discussion }) => {
         <div className="discussion__text" onClick={() => contentOpen()}>본문보기</div>
       </div>
       <div className={storyIsOpen ? "discussion__story show" : "discussion__story"} dangerouslySetInnerHTML={{__html: bodyHTML}}></div>
-      {/* // answer 컴포넌트 만들어서 다시 수정하기
-      <div className="discussion__answered" onClick={() => answerOpen()}>
-        <p>{answer ? "답변보기" : "답변없음"}</p>
+      <div className={answer !== null ? "discussion__answered" : "discussion__answered noReply"} onClick={() => answerOpen()}>
+        {answer === null ? <p>답변없음</p> : <p>답변보기</p>}
       </div>
+      {answer === null ? "" : 
       <div className={answerIsOpen ? "answer__container show" : "answer__container"}>
         <div className="discussion__avatar--wrapper">
-          <img className="discussion__avatar--image" src={avatarUrl} alt={`avatar of ${author}`}/>
+          <img className="discussion__avatar--image" src={answer.avatarUrl} alt={`avatar of ${answer.author}`} />
+          <div className="discussion__information">
+            <span className="author__name">{answer.author}</span>
+            <span className="author__date">{answer.createdAt}</span>
+          </div>
         </div>
-      </div> */}
+        <div className="discussion__content">
+          <p className="answer__comment" dangerouslySetInnerHTML={{__html: answer.bodyHTML}}></p>
+        </div>
+      </div>
+      }
     </li>
   )
 }
