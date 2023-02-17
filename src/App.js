@@ -7,21 +7,21 @@ function App() {
 
   useEffect(() => {
     getDiscussion();
-  }, [])
+  }, []);
 
   const getDiscussion = () => {
     return fetch(domain + "/discussions")
-    .then(res => res.json())
-    .then(data => {
-      setDiscussions(data);
-    })
-  }
+      .then(res => res.json())
+      .then(data => {
+        setDiscussions(data);
+      });
+  };
 
   const addDiscussion = ({ title, author, bodyText }) => {
     const newDiscussionData = {
-        title: title,
-        author: author,
-        bodyHTML: bodyText
+      title: title,
+      author: author,
+      bodyHTML: bodyText,
     };
     fetch(domain + "/discussions/", {
       method: "POST",

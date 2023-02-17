@@ -120,6 +120,7 @@ h1 {
   color: var(--main-color);
   background-color: #fff;
   border: 1px solid var(--main-color);
+  cursor: pointer;
 }
 .form {
   display: none;
