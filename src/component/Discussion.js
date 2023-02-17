@@ -26,8 +26,8 @@ export const Discussion = ({ discussion }) => {
           </div>
         </div>
         <div className="discussion__text" onClick={() => contentOpen()}>본문보기</div>
-      </div>
-      <div className={storyIsOpen ? "discussion__story show" : "discussion__story"} dangerouslySetInnerHTML={{__html: bodyHTML}}></div>
+      </div> 
+      <div className={storyIsOpen ? "discussion__story show" : "discussion__story"}dangerouslySetInnerHTML={{__html: bodyHTML}}></div>
       <div className={answer !== null ? "discussion__answered" : "discussion__answered noReply"} onClick={() => answerOpen()}>
         {answer === null ? <p>답변없음</p> : <p>답변보기</p>}
       </div>
